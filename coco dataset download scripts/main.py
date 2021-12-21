@@ -1,6 +1,9 @@
 import fiftyone as fo
 import fiftyone.zoo as foz
 import json
+import os
+import glob
+import shutil
 
 #dataset = foz.load_zoo_dataset("coco-2017")
 
@@ -37,3 +40,20 @@ dataset.name = "coco-2017-train"
 dataset.persistent = True
 print(dataset)
 segmentation_remove("C:\\Users\\BS-541\\fiftyone\\coco-2017\\train\\labels.json")
+
+def file_copy():
+    path = "C:\\Users\\BS-541\\Downloads\\Pistol_training_dataset\\train\\"
+    path_list = os.listdir(path)
+    # save_path = os.path.join("C:\\Users\\BS-541\\Downloads\\Pistol_training_dataset","selected_dataset")
+    save_path = "C:\\Users\\BS-541\\Downloads\\Pistol_training_dataset\\selected_dataset\\images\\"
+
+
+    print(str(path)+str(path_list[0]))
+    get_text_file = glob.glob(str(path)+str(path_list[0])+"/*.jpg")
+    for val in range(len(get_text_file)):
+        if val>=1501:
+            break
+        else:
+            # print(os.path.join(str(path),str(path_list[0]),get_text_file[val]))
+            filepath = os.path.join(path, path_list[0], get_text_file[val])
+            shutil.copy(filepath, save_path)
